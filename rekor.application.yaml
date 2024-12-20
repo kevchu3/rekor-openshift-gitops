@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rekor
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: rekor-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: base
+    repoURL: https://github.com/kevchu3/rekor-openshift-gitops.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true

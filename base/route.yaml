@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: rekor-server
+  namespace: rekor-system
+spec:
+  port:
+    targetPort: 3000-tcp
+  to:
+    name: rekor-server
+    weight: 100
+    kind: Service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
